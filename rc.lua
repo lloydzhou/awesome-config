@@ -23,7 +23,8 @@ require("helpers") -- helpers.lua
 altkey = "Mod1"
 modkey = "Mod4" -- your windows/apple key
 
-terminal = whereis_app('urxvtcd') and 'urxvtcd' or 'x-terminal-emulator' -- also accepts full path
+--terminal = whereis_app('urxvtcd') and 'urxvtcd' or 'x-terminal-emulator' -- also accepts full path
+terminal = 'sakura'
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -63,12 +64,12 @@ beautiful.init(awful.util.getdir("config") .. "/themes/zhongguo/zhongguo.lua")
 -- Window management layouts
 layouts = {
   awful.layout.suit.tile,
-  awful.layout.suit.tile.bottom,
-  awful.layout.suit.tile.top,
+  --awful.layout.suit.tile.bottom,
+  --awful.layout.suit.tile.top,
   --awful.layout.suit.fair,
   awful.layout.suit.max,
   awful.layout.suit.magnifier,
-  --awful.layout.suit.floating
+  awful.layout.suit.floating
 }
 -- }}}
 
@@ -421,6 +422,8 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     awful.key({ modkey, "Shift"   }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey,           }, "p", function () awful.util.spawn("scrot -e 'mv $f ~/picture/'") end),
+    awful.key({ modkey, "Shift"   }, "l", function () awful.util.spawn("xlock -model fiberlamp") end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
@@ -615,3 +618,6 @@ end)
 mytimer:start()
 
 require_safe('autorun')
+--awful.util.spawn_with_shell("disper -e -t left -r 1680x1050")
+awful.util.spawn_with_shell("fcitx-autostart")
+
